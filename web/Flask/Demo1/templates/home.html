@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>主页</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/home.css')}}">
+</head>
+<body>
+    <header>
+        <h1>欢迎来到云锦世界</h1>
+    </header>
+    <div class="container">
+        <h2>选择一个功能</h2>
+        <a href="/in" class="button">进入贴图生成器</a>
+        <a href="/introduction" class="button">查看云锦介绍</a>
+        <a href="/price" class="button">查询云锦定价</a>
+    </div>
+</body>
+</html>

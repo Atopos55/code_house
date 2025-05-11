@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云锦风格3D模型贴图生成器</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css')}}">
+    <script src="{{ url_for('static',filename='js/mytype.js')}}"></script>
+</head>
+<body>
+    <!-- 返回主页的按钮 -->
+    <div class="back-home">
+        <a href="/" class="back-button">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+            </svg>
+            返回主页
+        </a>
+    </div>
+
+    <h1>云锦风格3D模型贴图生成器</h1>
+
+    <div class="control-panel">
+        <div class="model-selector">
+            <div class="model-option" data-model="马克杯">马克杯</div>
+            <div class="model-option" data-model="汉服">汉服</div>
+        </div>
+
+        <div class="input-group">
+            <label for="color-input">颜色描述</label>
+            <input type="text" id="color-input" placeholder="例如：深红色和金色">
+            <div class="example-text">建议格式：主色+辅助色，如"宝蓝色配银白色"</div>
+        </div>
+
+        <div class="input-group">
+            <label for="pattern-input">图案描述</label>
+            <input type="text" id="pattern-input" placeholder="例如：祥云和龙凤纹">
+            <div class="example-text">传统纹样：牡丹、缠枝莲、八宝纹等</div>
+        </div>
+
+        <div class="input-group">
+            <label for="kind-input">种类描述</label>
+            <input type="text" id="kind-input" placeholder="例如：芙蓉妆、织金锦">
+            <div class="example-text">大致类别：妆花、织金、库缎、库锦等</div>
+        </div>
+
+        <div class="input-group">
+            <label for="thread-input">线描述</label>
+            <input type="text" id="thread-input" placeholder="例如：孔雀羽线、真丝绒">
+            <div class="example-text">传统种类：扁金线、金银线、桑蚕丝等</div>
+        </div>
+
+        <button id="generate-btn">生成云锦贴图</button>
+    </div>
+
+    <div class="model-viewer">
+        <h2 id="model-title">马克杯（未贴图）</h2>
+        <div class="model-container" id="model-container">
+            <canvas id="model-canvas"></canvas>
+        </div>
+        <div class="progress-container" id="progress-container">
+            <progress id="generation-progress" value="0" max="100"></progress>
+            <div class="status-message" id="status-message">准备生成...</div>
+        </div>
+    </div>
+</body>
+</html>

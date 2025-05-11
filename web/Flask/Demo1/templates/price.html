@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云锦定价查询</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1 {
+            color: #8B0000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .control-panel {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .model-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: space-between;
+        }
+
+        .model-option {
+            border: 2px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background-color: #8B0000;
+            color: white;
+            flex: 1;
+            text-align: center;
+        }
+
+        .model-option:hover {
+            border-color: #8B0000;
+            background-color: #A52A2A;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #A52A2A;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+            background-color: #f4f4f4;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .back-button svg {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            fill: currentColor;
+        }
+
+        #price-output {
+            margin-top: 20px;
+            border: 1px solid #8B0000;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #FFF0F0;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 返回主页的按钮 -->
+    <div class="back-home">
+        <a href="/" class="back-button">
+            <svg viewBox="0 0 24 24" width="24" height="24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+            </svg>
+            返回主页
+        </a>
+    </div>
+    <h1>云锦定价查询</h1>
+    <div class="control-panel">
+        <div class="model-selector">
+            <button class="model-option" data-model="云锦汉服">云锦汉服</button>
+            <button class="model-option" data-model="云锦旗袍">云锦旗袍</button>
+            <button class="model-option" data-model="马克杯">马克杯</button>
+            <button class="model-option" data-model="冰箱贴">冰箱贴</button>
+        </div>
+        <div class="input-group">
+            <label for="kind-select">选择种类</label>
+            <select id="kind-select">
+                <option value="库金">库金</option>
+                <option value="库锦">库锦</option>
+                <option value="库缎">库缎</option>
+                <option value="妆花">妆花</option>
+            </select>
+        </div>
+    </div>
+    <div id="price-output"></div>
+    <script>
+        document.querySelectorAll('.model-option').forEach(button => {
+            button.addEventListener('click', function () {
+                const model = this.dataset.model;
+                const phoneNumber = prompt('请输入您的电话号码');
+                if (phoneNumber) {
+                    const kind = document.getElementById('kind-select').value;
+                    let priceRange;
+                    if (kind === '妆花') {
+                        priceRange = '该商品为妆花种类，需要联系匠人进行后续沟通，请保持电话畅通。';
+                    } else {
+                        switch (model) {
+                            case '云锦汉服':
+                                priceRange = '该种类可以由机器直接生产，其价格区间是：25560.33元 - 60345.86元，我们后续会继续跟您确认价格，随时保持联系。';
+                                break;
+                            case '云锦旗袍':
+                                priceRange = '该种类可以由机器直接生产，其价格区间是：1501.20元 - 2285.74元，我们后续会继续跟您确认价格，随时保持联系。';
+                                break;
+                            case '马克杯':
+                                priceRange = '该种类可以由机器直接生产，其价格区间是：190.10元 - 377.19元，我们后续会继续跟您确认价格，随时保持联系。';
+                                break;
+                            case '冰箱贴':
+                                priceRange = '该种类可以由机器直接生产，其价格区间是：24.89元 - 46.02元，我们后续会继续跟您确认价格，随时保持联系。';
+                                break;
+                            default:
+                                priceRange = '无法获取该商品的价格信息。';
+                        }
+                    }
+                    document.getElementById('price-output').innerHTML = `您选择的是 ${model} ，种类为 ${kind} ，您输入的电话号码是：${phoneNumber} 。<br>${priceRange}`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
